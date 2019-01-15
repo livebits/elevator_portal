@@ -34,7 +34,7 @@ const Actions = ({
             filterValues,
             context: 'button',
         }) }
-        <CreateButton basePath={basePath} />
+        {/* <CreateButton basePath={basePath} /> */}
         <ExportButton
             resource={resource}
             sort={currentSort}
