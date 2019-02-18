@@ -39,7 +39,7 @@ export const DealEdit = props => (
             </ReferenceField>
             <TextInput label="موضوع قرارداد" source="title" />
             {/* <LongTextInput label="متن قرارداد" source="body" /> */}
-            <RichTextInput style={{height: 500,}} label="متن قرارداد" source="body" toolbar={toolbarOptions}  />
+            {/* <RichTextInput style={{height: 500,}} label="متن قرارداد" source="body" toolbar={toolbarOptions}  /> */}
 
             {/* <FileInput source="file" label="فایل قرارداد" 
                 placeholder={<p>فایل قرارداد را به اینجا بکشید یا کلیک کنید</p>} 

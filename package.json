@@ -1,6 +1,6 @@
 {
-  "name": "akaf_portal",
-  "version": "0.1.0",
+  "name": "swash_portal",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.7.0",
@@ -14,7 +14,7 @@
     "ra-input-rich-text": "^2.4.2",
     "ra-language-farsi": "^0.3.0",
     "react": "^16.6.3",
-    "react-admin": "^2.5.2",
+    "react-admin": "^2.7.0",
     "react-admin-date-inputs": "^1.0.21",
     "react-admin-loopback": "^1.0.1",
     "react-chartjs-2": "^2.7.4",
@@ -36,5 +36,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "react-to-print": "^2.0.0-alpha-6"
+  }
 }

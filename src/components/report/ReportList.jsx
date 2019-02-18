@@ -3,7 +3,10 @@ import { ArrayField, SingleFieldList, ChipField, List, DateField, Responsive, Da
      TextField, ReferenceField, EditButton, DeleteButton, EmailField, NumberField, FunctionField,
       ReferenceInput } from 'react-admin';
 import jMoment from 'moment-jalaali';
+import {Link, withRouter} from "react-router-dom";
 import { CardActions, CreateButton, ExportButton, RefreshButton } from 'react-admin';
+import { Button } from '@material-ui/core';
+import PrintRounded from '@material-ui/icons/PrintRounded';
 jMoment.loadPersian({dialect: 'persian-modern', usePersianDigits: true});
 
 const Actions = ({
@@ -64,6 +67,19 @@ export const ReportList = props => (
             <FunctionField label="تاریخ" source="createdAt" render={
                 record => (record.createdAt === null) ? '' : (record.createdAt._d === undefined ? jMoment((new Date(record.createdAt)).getTime()).format('jYYYY/jM/jD') : jMoment((new Date(record.createdAt._d.toISOString())).getTime()).format('jYYYY/jMM/jDD') )
             }/>
+
+            <FunctionField label="پرینت" source="id" render={record => {
+                return (
+                        <Button component={Link}
+                                    to={`/ReportPrint/${record.damageId}`}
+                                    color="primary" size="medium"
+                                    aria-label="پرینت">
+                            <PrintRounded />
+                            پرینت
+                        </Button>
+                    );
+                }}
+            />
 
             <EditButton />
             <DeleteButton />

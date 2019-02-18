@@ -70,7 +70,19 @@ import ReceiptRounded from '@material-ui/icons/ReceiptRounded';
 import PersonPinRounded from '@material-ui/icons/PersonPinRounded';
 import PaymentRounded from '@material-ui/icons/PaymentRounded';
 import PeopleRounded from '@material-ui/icons/PeopleRounded';
-import MoneyRounded from '@material-ui/icons/MoneyRounded';
+import WarningRounded from '@material-ui/icons/WarningRounded';
+import CheckBoxRounded from '@material-ui/icons/CheckBoxRounded';
+import InfoRounded from '@material-ui/icons/InfoRounded';
+import { EmergencyList } from './components/emergency/EmergencyList';
+import { EmergencyCreate } from './components/emergency/EmergencyCreate';
+import { EmergencyEdit } from './components/emergency/EmergencyEdit';
+import { CheckList } from './components/checkList/CheckList';
+import { CheckListCreate } from './components/checkList/CheckListCreate';
+import { CheckListEdit } from './components/checkList/CheckListEdit';
+import About from './components/settings/About';
+import { PerformanceReport } from './components/report/PerformanceReport';
+import { CustomerInspections } from './components/customer/CustomerInspections';
+import { AddCustomerInspection } from './components/customer/AddCustomerInspection';
 
 // Configure JSS
 const jss = create({plugins: [...jssPreset().plugins, rtl()]});
@@ -146,13 +158,17 @@ class App extends Component {
                   <Resource options={{ label: 'سرویس کاران' }} name="ServiceUsers" list={ServiceUserList} edit={ServiceUserEdit} create={ServiceUserCreate} icon={PeopleRounded} />,
                   <Resource options={{ label: 'قراردادها' }} name="Deals" list={DealList} edit={DealEdit} create={DealCreate} icon={BookmarkRounded} />,
                   <Resource options={{ label: 'خرابی ها' }} name="Damages" list={DamageList} edit={DamageEdit} create={DamageCreate} icon={PagesRounded} />,
+                  <Resource options={{ label: 'امداد' }} name="Emergencies" list={EmergencyList} edit={EmergencyEdit} create={EmergencyCreate} icon={WarningRounded} />,
                   <Resource options={{ label: 'گزارشات' }} name="Reports" list={ReportList} edit={ReportEdit} icon={ReportRounded} />,
+                  <Resource options={{ label: 'گزارش عملکرد' }} name="serviceUsersPerformanceReport" list={PerformanceReport} icon={ReportRounded} />,
                   <Resource options={{ label: 'فاکتورها' }} name="Factors" list={FactorList} edit={FactorEdit} icon={ReceiptRounded} />,
                   <Resource options={{ label: 'پرداختی ها' }} name="Payments" list={FactorPaymentList} icon={PaymentRounded} />,
                   <Resource options={{ label: 'سرویس کار روی نقشه' }} name="ServiceUsersOnMap" list={ServiceUsersOnMap} icon={MapRounded} />,
                   <Resource options={{ label: 'امور مالی' }} name="CompanyShow" list={CompanyShow} icon={PaymentRounded} />,
+                  <Resource options={{ label: 'چک لیست' }} name="CheckLists" list={CheckList} create={CheckListCreate} edit={CheckListEdit} icon={CheckBoxRounded} />,
                   <Resource options={{ label: 'پیام ها' }} name="Messages" list={MessageList} show={MessageShow} create={MessageCreate} icon={MessageRounded} />,
-                  
+                  <Resource options={{ label: 'درباره ما' }} name="Settings" list={About} icon={InfoRounded} />,                  
+                  // <Resource name="CustomerInspections" create={AddCustomerInspection} />,                  
                   
                   <Resource name="FactorItems" edit={FactorItemEdit}/>,
                   <Resource name="AppUsers"/>,
@@ -160,6 +176,7 @@ class App extends Component {
                   <Resource name="CustomerPayment"/>,
                   <Resource name="CompanyPayment"/>,
                   <Resource name="importCustomers"/>,
+                  <Resource name="CustomerInspections" />,
                 ]
                 : null,  
               

@@ -49,7 +49,7 @@ export const ServiceUserList = props => (
             <FunctionField label="نام" render={record => `${record.firstname} ${record.lastname}`} />
             <FunctionField label="وضعیت" render={record => record.status === "active" ? 'فعال' : 'غیرفعال'} />
             <TextField label="موبایل" source="mobile" />
-            <EmailField label="ایمیل" source="email" />
+            {/* <EmailField label="ایمیل" source="email" /> */}
             {/* <FunctionField label="جنسیت" render={record => record.gender === "female" ? 'زن' : 'مرد'} /> */}
             {/* <ReferenceField label="شرکت"  source="companyId" reference="Companies">
                 <TextField source="name" />

@@ -8,12 +8,12 @@ export const ServiceUserCreate = props => (
         <SimpleForm >
             <TextInput source="firstname" label="نام" />
             <TextInput source="lastname" label="نام خانوادگی" />
-            <TextInput source="email" label="ایمیل" type="email"/>
+            {/* <TextInput source="email" label="ایمیل" type="email"/> */}
             <TextInput type="number" source="mobile" label="شماره موبایل" />
-            <SelectInput source="gender" label="جنسیت" choices={[
+            {/* <SelectInput source="gender" label="جنسیت" choices={[
                 { id: 'male', name: 'مرد' },
                 { id: 'female', name: 'زن' }
-            ]} />
+            ]} /> */}
             <SelectInput source="status" label="وضعیت" choices={[
                 { id: 'active', name: 'فعال' },
                 { id: 'inactive', name: 'غیرفعال' }

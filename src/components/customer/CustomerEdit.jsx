@@ -13,16 +13,17 @@ export const CustomerEdit = props => (
             <DisabledInput label="کد" source="id" />
             <TextInput source="firstname" label="نام" />
             <TextInput source="lastname" label="نام خانوادگی" />
-            <TextInput source="email" label="ایمیل" />
+            {/* <TextInput source="email" label="ایمیل" /> */}
             <TextInput type="number" source="mobile" label="شماره موبایل" />
             <TextInput source="buildingName" label="نام ساختمان" />
             <LongTextInput source="address" label="آدرس" />
             <TextInput source="latitude" label="عرض جغرافیایی" />
             <TextInput source="longitude" label="طول جغرافیایی" />
-            <SelectInput source="gender" label="جنسیت" choices={[
+            <TextInput type="number" source="debt" label="مبلغ بدهی" />
+            {/* <SelectInput source="gender" label="جنسیت" choices={[
                 { id: 'male', name: 'مرد' },
                 { id: 'female', name: 'زن' }
-            ]} />
+            ]} /> */}
             <SelectInput source="status" label="وضعیت" choices={[
                 { id: 'active', name: 'فعال' },
                 { id: 'inactive', name: 'غیرفعال' }

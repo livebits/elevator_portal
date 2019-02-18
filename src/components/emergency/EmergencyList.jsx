@@ -22,8 +22,8 @@ const DamageFilter = (props) => (
     </Filter>
 );
 
-export const DamageList = props => (
-    <List {...props} bulkActions={false} title="مدیریت خرابی ها" filters={<DamageFilter />}>
+export const EmergencyList = props => (
+    <List {...props} bulkActions={false} title="امداد" >
         <Datagrid>
             <TextField label="کد" source="id" />
             <ReferenceField label="نام مشتری" source="appUserId" reference="Customers">
@@ -38,10 +38,10 @@ export const DamageList = props => (
             <FunctionField label="تاریخ بازدید" source="visitDate" render={
                 record => (record.visitDate === null) ? '' : (record.visitDate._d === undefined ? jMoment((new Date(record.visitDate)).getTime()).format('jYYYY/jM/jD HH:mm:ss') : jMoment((new Date(record.visitDate._d.toISOString())).getTime()).format('jYYYY/jMM/jDD HH:mm:ss') )
                 }/>
-            <TextField label="شرح خرابی" source="description" />
+            {/* <TextField label="شرح خرابی" source="description" /> */}
             {/* <TextField label="وضعیت خرابی" source="status" /> */}
             
-            <FunctionField label="گزارش" source="id" render={record => {
+            {/* <FunctionField label="گزارش" source="id" render={record => {
                 return (record.reports !== undefined ? 
                     <Button component={Link}
                                 to={`/Reports/${record.reports.id}`}
@@ -53,9 +53,9 @@ export const DamageList = props => (
                     : ''
                 );
             }}
-            />
+            /> */}
 
-            <FunctionField label="فاکتور" source="id" render={record => {
+            {/* <FunctionField label="فاکتور" source="id" render={record => {
                 return (
                         record.factors !== undefined ?
                         <Button component={Link}
@@ -68,7 +68,7 @@ export const DamageList = props => (
                         : ''
                     );
                 }}
-            />
+            /> */}
 
             <EditButton />
             <DeleteButton />

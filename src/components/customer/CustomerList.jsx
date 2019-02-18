@@ -6,6 +6,7 @@ import { ArrayField, SingleFieldList, ChipField, List, SimpleList, Responsive, D
 import { IconButton } from '@material-ui/core';
 import {Link, withRouter} from "react-router-dom";
 import PaymentRounded from '@material-ui/icons/PaymentRounded';
+import ViewDayRounded from '@material-ui/icons/ViewDayRounded';
 import ImportExportRounded from '@material-ui/icons/ImportExportRounded';
 import Button from '@material-ui/core/Button';
 import { CardActions, CreateButton, ExportButton, RefreshButton } from 'react-admin';
@@ -39,6 +40,10 @@ const Actions = ({
             context: 'button',
         }) }
         <CreateButton basePath={basePath} />
+        <Button color="primary" size="medium" component={Link} to="/CustomerInspections/create">
+            {/* <ImportExportRounded /> */}
+            ثبت بازرسی آسانسور
+        </Button>
         <ExportButton
             resource={resource}
             sort={currentSort}
@@ -65,13 +70,27 @@ export const CustomerList = props => {
             <FunctionField label="وضعیت" render={record => record.status === "active" ? 'فعال' : 'غیرفعال'} />
             <TextField label="نام ساختمان" source="buildingName" />
             <TextField label="موبایل" source="mobile" />
-            <EmailField label="ایمیل" source="email" />
+            {/* <EmailField label="ایمیل" source="email" /> */}
             {/* <FunctionField label="جنسیت" render={record => record.gender === "male" ? 'مرد' : 'زن'} /> */}
             {/* <ReferenceField label="شرکت"  source="companyId" reference="Companies">
                 <TextField source="name" />
             </ReferenceField> */}
             {/* <TextField label="نام کاربری" source="username" /> */}
             
+            <FunctionField label="بازدید ماهیانه" source="id" render={record => {
+                return (record.id !== undefined ? 
+                    <Button component={Link}
+                                to={`/CustomerInspections/${record.id}`}
+                                color="primary" size="medium"
+                                aria-label="وضعیت بازدید">
+                        <ViewDayRounded/>
+                        وضعیت بازدید
+                    </Button>
+                    : ''
+                );
+            }}
+            />
+
             <FunctionField label="امورمالی" source="id" render={record => {
                 return (record.id !== undefined ? 
                     <Button component={Link}
