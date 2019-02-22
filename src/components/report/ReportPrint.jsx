@@ -176,9 +176,22 @@ class ComponentToPrint extends React.Component {
 
     render() {
         let damageData = this.props.data;
+
+        let checkList = "";
+        if(damageData.id !== undefined) {
+            if(damageData.reports.checkList !== null && damageData.reports.checkList !== "") {
+
+                let checkLists = JSON.parse(damageData.reports.checkList);
+                
+                checkLists.forEach(check => {
+                    checkList += check.title + " - "
+                });
+            }
+        }
+
         return (
             damageData.id !== undefined ?
-            <table style={{borderCollapse: 'collapse', border: '1px solid black', margin: '50px 20px', direction: 'rtl'}}>
+            <table style={{borderCollapse: 'collapse', border: '1px solid black', margin: '50px 20px', direction: 'rtl', width: '90%'}}>
                 <tbody>
                     <tr>
                         <td style={{border: '1px solid black', width: 150, padding: 5}}>نام مشتری</td>
@@ -196,10 +209,18 @@ class ComponentToPrint extends React.Component {
                         <td style={{border: '1px solid black', padding: 5}}>شرح خرابی</td>
                         <td style={{border: '1px solid black', padding: 5}}>{`${damageData.reports.body}`}</td>
                     </tr>
+                    <tr>
+                        <td style={{border: '1px solid black', padding: 5}}>چک لیست</td>
+                        <td style={{border: '1px solid black', padding: 5}}>
+                            {
+                                checkList
+                            }
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             :
-            <Loading loadingPrimary="app.page.loading" />
+            <Loading loadingPrimary="" />
         );
     }
 }
