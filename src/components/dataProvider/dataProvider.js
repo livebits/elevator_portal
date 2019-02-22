@@ -240,7 +240,7 @@ const convertDataProviderRequestToHTTP = (type, resource, params) => {
                 case 'Settings':
                 console.log(params);
                 
-                    url = `${API_URL}/Settings/${params.data.id}`;
+                    url = `${API_URL}/Settings/UpdateSettings`;
                     break;  
                 case 'FactorItems':
                     params.data.total = params.data.quantity * params.data.unitPrice;

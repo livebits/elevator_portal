@@ -72,6 +72,7 @@ import PaymentRounded from '@material-ui/icons/PaymentRounded';
 import PeopleRounded from '@material-ui/icons/PeopleRounded';
 import WarningRounded from '@material-ui/icons/WarningRounded';
 import CheckBoxRounded from '@material-ui/icons/CheckBoxRounded';
+import CommentRounded from '@material-ui/icons/CommentRounded';
 import InfoRounded from '@material-ui/icons/InfoRounded';
 import { EmergencyList } from './components/emergency/EmergencyList';
 import { EmergencyCreate } from './components/emergency/EmergencyCreate';
@@ -83,6 +84,7 @@ import About from './components/settings/About';
 import { PerformanceReport } from './components/report/PerformanceReport';
 import { CustomerInspections } from './components/customer/CustomerInspections';
 import { AddCustomerInspection } from './components/customer/AddCustomerInspection';
+import { CommentsList } from './components/comments/CommentsList';
 
 // Configure JSS
 const jss = create({plugins: [...jssPreset().plugins, rtl()]});
@@ -166,6 +168,7 @@ class App extends Component {
                   <Resource options={{ label: 'سرویس کار روی نقشه' }} name="ServiceUsersOnMap" list={ServiceUsersOnMap} icon={MapRounded} />,
                   <Resource options={{ label: 'امور مالی' }} name="CompanyShow" list={CompanyShow} icon={PaymentRounded} />,
                   <Resource options={{ label: 'چک لیست' }} name="CheckLists" list={CheckList} create={CheckListCreate} edit={CheckListEdit} icon={CheckBoxRounded} />,
+                  <Resource options={{ label: 'نظرات کاربران' }} name="Comments" list={CommentsList} icon={CommentRounded} />,
                   <Resource options={{ label: 'پیام ها' }} name="Messages" list={MessageList} show={MessageShow} create={MessageCreate} icon={MessageRounded} />,
                   <Resource options={{ label: 'درباره ما' }} name="Settings" list={About} icon={InfoRounded} />,                  
                   // <Resource name="CustomerInspections" create={AddCustomerInspection} />,                  
