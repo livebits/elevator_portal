@@ -235,6 +235,7 @@ const convertDataProviderRequestToHTTP = (type, resource, params) => {
         case UPDATE:
             switch (resource) {
                 case 'Customers':
+                    params.data.username = params.data.mobile;
                     url = `${API_URL}/AppUsers/${params.data.id}`;
                     break;
                 case 'Settings':
@@ -247,6 +248,7 @@ const convertDataProviderRequestToHTTP = (type, resource, params) => {
                     url = `${API_URL}/FactorItems/${params.data.id}`;
                     break;
                 case 'ServiceUsers':
+                    params.data.username = params.data.mobile;
                     url = `${API_URL}/AppUsers/${params.data.id}`;
                     break;
                 case 'Emergencies':
@@ -453,6 +455,185 @@ const convertHTTPResponseToDataProvider = (response, type, resource, params) => 
     }
 };
 
+const convertHTTPErrorToDataProvider = (error, type, resource, params) => {
+    // const { headers, json } = response;
+    let errors = "";
+    switch (type) {
+        // case GET_LIST:
+        
+        //     return {
+        //         data: json,
+        //         total: parseInt(json.length, 10),
+        //     };
+
+        // case GET_ONE:
+            
+            // switch (resource) {
+            //     case "menu":
+                    
+            //         let menuData = json;
+            //         let menuActionsArray = [];
+            //         menuData.actions.forEach((action, index) => {
+                        
+            //             menuActionsArray[index] = action.id;
+            //         });
+            //         menuData.actions = menuActionsArray;
+                    
+            //         return {
+            //             data: menuData
+            //         };
+
+            //     case "manager":
+            //         let managerData = json;
+            //         let rolesArray = [];
+            //         managerData.roles.forEach((action, index) => {
+                        
+            //             rolesArray[index] = action.id;
+            //         });
+            //         managerData.roles = rolesArray;
+            //         console.log(">>", json);
+                    
+            //         return {
+            //             data: managerData
+            //         };
+            
+            //     default:
+            //         return {
+            //             data: json
+            //         };
+            //         break;
+            // };
+        case UPDATE:
+            switch (resource) {
+                case 'Customers':
+                    errors = parseErrors(error, "customer");
+                    return Promise.reject({ message: errors});
+
+                case 'ServiceUsers':
+                    errors = parseErrors(error, "serviceUser");
+                    return Promise.reject({ message: errors});
+
+                default:
+                    return ;
+            };
+        case CREATE:
+            
+            switch (resource) {
+                case 'Customers':
+                    errors = parseErrors(error, "customer");
+                    return Promise.reject({ message: errors});
+
+                case 'ServiceUsers':
+                    errors = parseErrors(error, "serviceUser");
+                    return Promise.reject({ message: errors});
+
+                default:
+                    return ;
+            };
+        
+        // case DELETE:
+            
+        //     switch (resource) {
+            
+        //         default:
+        //             return { data: { ...params.data, id: json.id } };
+        //     };    
+            
+        // case GET_MANY:
+        //     return { data: json.map(x => x) };
+            
+        // case GET_MANY_REFERENCE:
+        //     return {
+        //         data: json,
+        //         total: parseInt(json.length, 10),
+        //     };
+        default:
+            // return { data: json };
+    }
+};
+
+//helper funcs
+function parseErrors(err, model) {
+    console.log(err);
+    
+    //handle error
+    if(err.error.statusCode === 401){
+        let errors = new Array();
+        
+        errors[0] = "دسترسی غیر مجاز";
+        return "دسترسی غیر مجاز";
+    }
+    else if(err.error.name === "ValidationError") {
+        
+        let codes = err.error.details.codes;
+        let errors = new Array();
+        
+        Object.keys(codes).map(function(attr_name, i) {
+            errors[i] = codes[attr_name].map(error_cat => {
+                if(attr_name === "email") {
+                    return '';
+                }
+                return generateErrorMessage(attr_name, error_cat, model)
+            })
+            
+        })
+        console.log(errors);
+
+        let message = "";
+        errors.forEach(err => {
+            if(err != "" ) {
+                message += err;
+            }
+        });
+        
+        return message;
+    }
+    else {
+        let errors = new Array();
+        
+        errors[0] = "خطای سرور رخ داده است";
+        return "خطای سرور رخ داده است";
+    }
+};
+
+function generateErrorMessage(attribute, error_type, model) {
+    switch (error_type) {
+        case 'uniqueness':
+            return `${getAttribName(attribute, model)} از قبل ثبت شده است. `;
+        case 'custom.email':
+            return `${getAttribName(attribute, model)} وارد شده نامعتبر می باشد. `;
+        case 'date':
+            return `${getAttribName(attribute, model)} باید به صورت تاریخ باشد. `;
+        case 'numericality.number': 
+            return `${getAttribName(attribute, model)} باید به صورت مقدار عددی باشد. `;
+        default:
+            break;
+    }
+    
+}
+
+function getAttribName(attribute, model) {
+
+    const attributes = {
+        serviceUser: {
+            email: 'ایمیل',
+            mobile: 'موبایل',
+            username: 'موبایل',
+        },
+        customer: {
+            email: 'ایمیل',
+            mobile: 'موبایل',
+            username: 'موبایل',
+            password: 'رمز عبور',
+            birth_date: 'تاریخ تولد',
+        }
+    }
+
+    return attributes[model][attribute];
+}
+///
+
+
 /**
  * @param {string} type Request type, e.g GET_LIST
  * @param {string} resource Resource name, e.g. "posts"
@@ -483,7 +664,8 @@ export default (type, resource, params) => {
     const { fetchJson } = fetchUtils;
     const { url, options } = convertDataProviderRequestToHTTP(type, resource, params);
     return fetchJson(url, options)
-        .then(response => convertHTTPResponseToDataProvider(response, type, resource, params));
+        .then(response => convertHTTPResponseToDataProvider(response, type, resource, params))
+        .catch(error => convertHTTPErrorToDataProvider(error.body, type, resource, params));
 };
 
 
