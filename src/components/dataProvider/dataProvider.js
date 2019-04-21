@@ -242,13 +242,19 @@ const convertDataProviderRequestToHTTP = (type, resource, params) => {
                 console.log(params);
                 
                     url = `${API_URL}/Settings/UpdateSettings`;
-                    break;  
+                    break;
+                case 'Damages':
+                    console.log(params);
+                    
+                        url = `${API_URL}/Damages/Update`;
+                        break;  
                 case 'FactorItems':
                     params.data.total = params.data.quantity * params.data.unitPrice;
                     url = `${API_URL}/FactorItems/${params.data.id}`;
                     break;
                 case 'ServiceUsers':
                     params.data.username = params.data.mobile;
+                    params.data.password = params.data.mobile;
                     url = `${API_URL}/AppUsers/${params.data.id}`;
                     break;
                 case 'Emergencies':
